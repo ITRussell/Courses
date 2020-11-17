@@ -28,11 +28,32 @@ public:
         }
         queue<TreeNode*> q;
         q.push(root);
-        while(!q.empty()){
-            // finish zizag
-        }
-        
 
+        bool foward = true;
+        while(!q.empty()){
+            int levelSize = q.size();
+            vector<int> currLevel(levelSize);
+            for (int i = 0; i < levelSize; i++){
+                TreeNode* currNode = q.front();
+                q.pop();
+
+                if (foward){
+                    currLevel[i] = currNode->key;
+                }
+                else {
+                    currLevel[levelSize-1 - i] = currNode->key;
+                }
+
+                if (currNode->left != nullptr){
+                    q.push(currNode->left);
+                }
+                if (currNode->right != nullptr){
+                    q.push(currNode->right);
+                }
+            }
+            result.push_back(currLevel);
+            foward = !foward;
+        }
         return result;
     }
    
@@ -53,5 +74,6 @@ vector<vector<int>> result = Operations::zigZag(root);
     for (auto num : vec) {
       cout << num << " ";
     }
+    cout << "\n";
   }
 }
