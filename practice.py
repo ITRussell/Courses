@@ -1,18 +1,16 @@
 import os
 from random import *
-import glob as glob
-
 
 class Practice:
     def menu():
 
         problem_count = 0
         completed_problem_count = 0
-        attempted_problem_count = 0
+        attempted_problem_count = problem_count + completed_problem_count
 
         def clear_screen():
             os.system('clear')
-
+        
         os.mkdir('tmp')
 
         selecting = True
@@ -31,7 +29,7 @@ class Practice:
                 working = True
                 currProb = Problem()
                 while (working):
-                    print("[1- New Problem, 3- Start]\n")
+                    print("[1- New Problem, 3- Start, q- quit]\n")
                     print(f"{currProb.problem_name}")
                     print(f"\n{currProb.prompt}")
 
@@ -42,7 +40,6 @@ class Practice:
 
                     elif (problem_option == '2'):
                         print("Getting solution...")
-                        break
 
                     elif (problem_option == '3'):
                         problem_count += 1
@@ -70,7 +67,6 @@ class Practice:
 
                             elif (working_option == '2'):
                                 print("Getting solution...")
-                                #nvim findAllDuplicates.cpp findMissingNum.cpp -c 'vsplit | bn | terminal'
 
 
                             elif (working_option == '3'):
@@ -95,21 +91,14 @@ class Practice:
                                 working = False
                                 break
 
+                    elif (problem_option == 'q'):
+                        break
 
-            # Choice 2 description
-            elif (choice == "2"):
-                print(2)
-
-            # Choice 3 description
-            elif (choice == "3"):
-                os.system("nvim")
+                    clear_screen()
 
             # To leave app
             elif (choice == "q"):
-                completed_problems = glob.glob('tmp/*.cpp')
-                for problem in completed_problems:
-                    os.remove(problem)
-                os.rmdir('tmp')
+                os.system('rm -r tmp');
                 clear_screen()
                 break
 
@@ -135,7 +124,7 @@ class Problem:
                 text = file.read()
                 file.close()
                 prompt = text[text.find("/*")+2:text.find("*/")]
-                self.prompt = prompt
+                self.prompt = "/*" + prompt + "*/"
 
         else:
             self.problem_path = Problem._get_certain_problem()
