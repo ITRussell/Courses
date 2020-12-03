@@ -24,11 +24,29 @@ class TreeNode {
 };
 
 class MaximumPathSum {
- public:
-  static int findMaximumPathSum(TreeNode *root) {
-    // TODO: Write your code here
-    return -1;
-  }
+public:
+    static int findMaximumPathSum(TreeNode* root){
+        int maxSum = numeric_limits<int>::min();
+        calculatePathSum(root, maxSum);
+        return maxSum;
+    }
+private:
+    static int calculatePathSum(TreeNode* currNode, int &maxSum){
+        if (currNode == nullptr){
+            return 0;
+        }
+
+        int leftTreeSum = calculatePathSum(currNode->left, maxSum);
+        int rightTreeSum = calculatePathSum(currNode->right, maxSum);
+
+        leftTreeSum = max(leftTreeSum, 0);
+        rightTreeSum = max(rightTreeSum, 0);
+
+        int currSum = leftTreeSum + rightTreeSum + currNode->val;   
+        maxSum = max(currSum, maxSum);
+
+        return max(leftTreeSum, rightTreeSum) + currNode->val;
+    }
 };
 
 int main(int argc, char *argv[]) {
