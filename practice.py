@@ -39,12 +39,12 @@ class Practice:
                         clear_screen()
 
                     elif (problem_option == '2'):
-                        os.system(f"find Grokking/All -name \"{currProb.problem_name}\" | xargs nvim")
+                        os.system(f"find Grokking/All -name \"{currProb.problem_name}\" | xargs subl")
 
                     elif (problem_option == '3'):
                         problem_count += 1
                         os.system(f"echo '{currProb.prompt}' > tmp/quiz{problem_count}.cpp")
-                        os.system(f"nvim tmp/quiz{problem_count}.cpp")
+                        os.system(f"subl tmp/quiz{problem_count}.cpp")
                         complete = False
                         clear_screen()
                         print("[1- New Problem, 2- Solution, 3- Continue, 4- Correct, 5- Incorrect, q- Quit]\n")
@@ -66,10 +66,10 @@ class Practice:
                                     
 
                             elif (working_option == '2'):
-                                os.system(f"find Grokking/All -name \"{probName}\" | xargs nvim")
+                                os.system(f"find Grokking/All -name \"{currProb.problem_name}\" | xargs subl")
 
                             elif (working_option == '3'):
-                                os.system(f"nvim tmp/quiz{problem_count}.cpp")
+                                os.system(f"subl tmp/quiz{problem_count}.cpp")
 
 
                             elif (working_option == '4'):
